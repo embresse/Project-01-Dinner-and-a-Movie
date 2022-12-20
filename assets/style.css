@@ -28,3 +28,10 @@ header {
     width: max-content;
     padding: 15px;
 }
+
+.local-weather {
+    display: none;
+}
+.places-to-go {
+    display: none;
+}

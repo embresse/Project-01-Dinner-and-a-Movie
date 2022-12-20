@@ -4,9 +4,14 @@ var resultContainer= document.querySelector('#weather')
 var city = document.createElement('p')
  resultContainer.append(city)
 
+var localWeatherHeader = document.querySelector('.local-weather')
+var placesToGo = document.querySelector('.places-to-go')
+
 button.addEventListener('click',function(event){
     event.preventDefault()
-    console.log(inputValue)
+    localWeatherHeader.style.display = "block";
+    placesToGo.style.display = "block";
+
     var city = inputValue.value;
     
 
@@ -39,3 +44,33 @@ button.addEventListener('click',function(event){
            console.log(renderWeather)
           renderWeather()
     })
+
+    // if all is selected then checks both theaters and restaurants, if unselected deselects all
+    $("#all").change(function () {
+        if (!$("input:checkbox").is("checked")) {
+            $("input:checkbox").prop("checked", this.checked);
+    
+        } else {
+            $("input:checkbox").prop("checked", false);
+        }
+    });
+
+    // unchecks "both" if one box is unchecked
+    $(".check-single").change(function () {
+        $(".check-single").click(function () {
+            if ($(this).is(":checked")) {
+                var isAllChecked = 0;
+    
+                $(".check-single").each(function () {
+                    if (!this.checked) isAllChecked = 1;
+                });
+    
+                if (isAllChecked == 0) {
+                    $("all").prop("checked", true);
+                }
+            } else {
+                $("#all").prop("checked", false);
+            }
+        });
+    });
+

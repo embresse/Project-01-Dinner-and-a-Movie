@@ -27,7 +27,7 @@
                     type="text"
                     placeholder="Enter Location..."
                 />
-                <button class="button submit-icon" id ="button" type="submit">
+                <button class="button submit-icon is-success" id ="button" type="submit">
                     Submit <i class="fas fa-arrow-right"></i>
                 </button>
             </div>
@@ -55,7 +55,7 @@
                     <input
                         type="checkbox"
                         id="restaurants"
-                        value="restaurents"
+                        value="restaurants"
                         class="check-single"
                     />
                     <label class="label-text" for="restaurants">Restaurants</label>
@@ -67,7 +67,7 @@
     <div class = "map-container">
         <div id="map"></div>
         <div id="sidebar">
-            <h2>Places to go...</h2>
+            <h2 class="places-to-go">Places to go...</h2>
             <ul id="places"></ul>
             
         </div>
@@ -75,7 +75,9 @@
     </div>
 <!-- WEATHER CONTAINER -->
     <div class = "weather-container">
+        <h2 class = "local-weather">Your Local Weather:</h2>
         <div id="weather"> </div>
+        
 
     </div>
 
