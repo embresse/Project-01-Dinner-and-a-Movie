@@ -9,6 +9,7 @@ var placesToGo = document.querySelector('.places-to-go')
 
 button.addEventListener('click',function(event){
     event.preventDefault()
+
     localWeatherHeader.style.display = "block";
     placesToGo.style.display = "block";
 
@@ -45,6 +46,21 @@ button.addEventListener('click',function(event){
           renderWeather()
     })
 
+    function initMap () {
+        const richmond = {lat: 37.541290, lng: -77.434769}
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 12,
+            center: richmond,
+        });
+        const marker = new google.maps.Marker ({
+            position: richmond,
+            map: map,
+        });
+    }
+ initMap();
+
+
     // if all is selected then checks both theaters and restaurants, if unselected deselects all
     $("#all").change(function () {
         if (!$("input:checkbox").is("checked")) {
@@ -58,7 +74,7 @@ button.addEventListener('click',function(event){
     // unchecks "both" if one box is unchecked
     $(".check-single").change(function () {
         $(".check-single").click(function () {
-            if ($(this).is(":checked")) {
+            if ($(this).is("checked")) {
                 var isAllChecked = 0;
     
                 $(".check-single").each(function () {

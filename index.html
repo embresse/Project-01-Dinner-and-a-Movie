@@ -14,11 +14,11 @@
 
 <body>
     <header>
-        <h1 class = "page-title">Dinner and a Movie!</h1>
-        <p class = "description">~A simple date night app to find local restaurants and theaters~</p>
+        <h1 class = "page-title">🍿 Dinner and a Movie 🎥</h1>
+        <p class = "description">✨A simple date night app to find local restaurants and theaters✨</p>
     </header>
  <!-- LOCATION BOX -->
-    <div>
+    <div class = "hero">
         <form id="location-search" class="location-search">
             <div class="columns is-flex is-justify-content-center submit-container">
                 <input
@@ -64,24 +64,26 @@
         </form>
     </div>
 <!-- MAP CONTAINER -->
-    <div class = "map-container">
+    <div class = "map-container is-flex">
         <div id="map"></div>
         <div id="sidebar">
-            <h2 class="places-to-go">Places to go...</h2>
+            <h2 class="places-to-go has-text-weight-bold">Places to go...</h2>
             <ul id="places"></ul>
             
         </div>
        
     </div>
 <!-- WEATHER CONTAINER -->
-    <div class = "weather-container">
-        <h2 class = "local-weather">Your Local Weather:</h2>
+    <div class = "weather-container is-flex-direction-column has-background-link">
+        <h2 class = "local-weather has-text-weight-bold">Your Local Weather:</h2>
         <div id="weather"> </div>
         
 
     </div>
 
-
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCnC2PYzLw4srz8O1ZobyBFcJ19RqZiEI&callback=initMap">
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/script.js"></script>
