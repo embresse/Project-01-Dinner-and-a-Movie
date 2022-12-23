@@ -1,5 +1,5 @@
 var button= document.querySelector('#button')
-var inputValue = document.querySelector('#location-input')
+var inputElement = document.querySelector('#location-input')
 var resultContainer= document.querySelector('#weather')
 var city = document.createElement('p')
  resultContainer.append(city)
@@ -7,18 +7,26 @@ var city = document.createElement('p')
 var localWeatherHeader = document.querySelector('.local-weather')
 var placesToGo = document.querySelector('.places-to-go')
 
+const options = {
+    // fields: ["formatted_address", "geometry", "name"],
+    strictBounds: false,
+    types: ["establishment", "geocode"],
+  };
+
+let checkBoxValue = " ";
+let restaurantsBox = document.getElementById ("restaurants");
+let theatersBox = document.getElementById ("theaters");
+
+
+
 button.addEventListener('click',function(event){
     event.preventDefault()
 
-    localWeatherHeader.style.display = "block";
-    placesToGo.style.display = "block";
+    })
 
-    var city = inputValue.value;
-    
+    function renderWeather(city) {
 
-    function renderWeather(weather) {
-        console.log(weather);
-        event.preventDefault
+        var city = inputElement.value;
     
         fetch(
           "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -42,51 +50,73 @@ button.addEventListener('click',function(event){
 
           });
         }
-           console.log(renderWeather)
-          renderWeather()
-    })
 
     function initMap () {
-        const richmond = {lat: 37.541290, lng: -77.434769}
-
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 12,
-            center: richmond,
-        });
-        const marker = new google.maps.Marker ({
-            position: richmond,
-            map: map,
-        });
-    }
- initMap();
-
-
-    // if all is selected then checks both theaters and restaurants, if unselected deselects all
-    $("#all").change(function () {
-        if (!$("input:checkbox").is("checked")) {
-            $("input:checkbox").prop("checked", this.checked);
-    
-        } else {
-            $("input:checkbox").prop("checked", false);
-        }
-    });
-
-    // unchecks "both" if one box is unchecked
-    $(".check-single").change(function () {
-        $(".check-single").click(function () {
-            if ($(this).is("checked")) {
-                var isAllChecked = 0;
-    
-                $(".check-single").each(function () {
-                    if (!this.checked) isAllChecked = 1;
-                });
-    
-                if (isAllChecked == 0) {
-                    $("all").prop("checked", true);
-                }
-            } else {
-                $("#all").prop("checked", false);
+        const autoComplete = new google.maps.places.Autocomplete(inputElement, options);
+        autoComplete.addListener("place_changed", () => {
+            console.log(autoComplete.getPlace())
+            
+            const selectedPlace = autoComplete.getPlace()
+            const latitude = selectedPlace.geometry.location.lat()
+            const longitude = selectedPlace.geometry.location.lng()
+            const coordinates = {
+                lat: latitude,
+                lng: longitude,
             }
-        });
-    });
+         
 
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: coordinates,
+            });
+
+            let getNextPage; 
+            const places = new google.maps.places.PlacesService(map)
+
+            places.textSearch({
+                location: coordinates,
+                radius: 5000,
+                query: checkBoxValue,
+
+            }, (results, status, pagination) => {
+                if (status !== "OK" || !results)
+                return;
+                
+                addPlaces(results, map)
+
+                if (pagination && pagination.hasNextPage) {
+                  getNextPage = () => {
+                    pagination.nextPage()
+                  }  
+                }
+
+            })
+
+            function addPlaces(locations, map) {
+                for (const location of locations) {
+                    if (location.geometry&&location.geometry.location) {
+                        const image = {
+                            url: location.icon,
+                            size: new google.maps.Size(71,71),
+                            origin: new google.maps.Point(0,0),
+                            anchor: new google.maps.Point(17,34),
+                            scaledSize: new google.maps.Size(25,25),
+                        };
+                        new google.maps.Marker({
+                            map,
+                            icon: image,
+                            title: location.name,
+                            position: location.geometry.location,
+                    })
+                }
+            }}
+
+            const city = selectedPlace.address_components[0]; 
+
+            renderWeather(city)
+        })
+    }
+
+ 
+
+    window.initMap=initMap;

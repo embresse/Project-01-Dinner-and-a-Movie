@@ -6,7 +6,7 @@
     
     
     header {
-        background-color: darkslategrey;
+        background-color: #5794d7;
     }
     
     .page-title {
@@ -19,14 +19,14 @@
     
     .hero {
         background-size: cover;
-        background-image: url("./images/richmond-skyline.jpg");
+        background-image: url("./images/beautiful-shot-richmond-virginia-skyline-with-cloudy-blue-sky.jpg");
         
     }
     .description {
         padding: 10px;
         text-align: center;
         font-size: 24px;
-        color:cornflowerblue;
+        color:#19494d;
     }
     
     .location-search {
@@ -41,14 +41,11 @@
     
     }
     .local-weather {
-        display: none;
         padding: 10px;
     
     }
     
-    .places-to-go {
-        display: none;
-    }
+    
     
     .checkbox-container {
         padding-right: 30px;
