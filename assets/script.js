@@ -8,7 +8,6 @@ var localWeatherHeader = document.querySelector('.local-weather')
 var placesToGo = document.querySelector('.places-to-go')
 
 const options = {
-    // fields: ["formatted_address", "geometry", "name"],
     strictBounds: false,
     types: ["establishment", "geocode"],
   };
@@ -19,8 +18,10 @@ let theatersBox = document.getElementById ("theaters");
 
 
 
+
 button.addEventListener('click',function(event){
     event.preventDefault()
+
 
     })
 
@@ -73,6 +74,12 @@ button.addEventListener('click',function(event){
             let getNextPage; 
             const places = new google.maps.places.PlacesService(map)
 
+            if (restaurantsBox.checked == true ) {
+                checkBoxValue = "restaurants";
+            } else if (theatersBox.checked == true) {
+                checkBoxValue = "theaters";
+            }
+
             places.textSearch({
                 location: coordinates,
                 radius: 5000,
@@ -114,6 +121,7 @@ button.addEventListener('click',function(event){
             const city = selectedPlace.address_components[0]; 
 
             renderWeather(city)
+        
         })
     }
 
