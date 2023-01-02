@@ -19,7 +19,7 @@
     
     .hero {
         background-size: cover;
-        background-image: url("./images/beautiful-shot-richmond-virginia-skyline-with-cloudy-blue-sky.jpg");
+        background-image: url("./images/richmond-skyline.jpg");
         
     }
     .description {
@@ -28,7 +28,11 @@
         font-size: 24px;
         color:#19494d;
     }
-    
+
+    #button {
+       margin-left: 20px;
+    }
+
     .location-search {
         width: max-content;
         padding: 15px;

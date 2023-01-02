@@ -20,7 +20,8 @@ let theatersBox = document.getElementById ("theaters");
 
 
 button.addEventListener('click',function(event){
-    event.preventDefault()
+    location.reload(event);
+    
 
 
     })
@@ -117,6 +118,9 @@ button.addEventListener('click',function(event){
                             title: location.name,
                             position: location.geometry.location,
                     })
+                    
+
+                    
                 }
             }}
 
