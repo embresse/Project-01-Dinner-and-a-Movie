@@ -74,9 +74,11 @@ button.addEventListener('click',function(event){
             let getNextPage; 
             const places = new google.maps.places.PlacesService(map)
 
-            if (restaurantsBox.checked == true ) {
+            if (restaurantsBox.checked == true && theatersBox.checked == true) {
+                checkBoxValue = "restaurants+and+theaters";
+            } else if (restaurantsBox.checked == true) {
                 checkBoxValue = "restaurants";
-            } else if (theatersBox.checked == true) {
+            }else if (theatersBox.checked == true) {
                 checkBoxValue = "theaters";
             }
 
