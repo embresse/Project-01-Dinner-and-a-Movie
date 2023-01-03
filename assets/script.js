@@ -21,6 +21,7 @@ let theatersBox = document.getElementById ("theaters");
 
 button.addEventListener('click',function(event){
     location.reload(event);
+    localStorage.clear();
     
 
 
@@ -131,6 +132,20 @@ button.addEventListener('click',function(event){
         })
     }
 
- 
+    function saveLocations () {
+        var savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+
+        var entry = inputElement.value;
+
+        savedLocations.push(entry);
+        localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
+
+        console.log (savedLocations)
+    }
+
+    
+ saveLocations ();
+
+
 
     window.initMap=initMap;
